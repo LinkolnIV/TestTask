@@ -10,7 +10,7 @@ class Route
     public function __construct(
         private string $method,
         private string $path,
-    )
-    {}
+    ) {
+    }
 
 }

@@ -15,19 +15,19 @@ class BaseRepository
     {
         $this->entity = $entity;
         $this->_connect = (new Connection())->getConnect();
-        $this->tableName = str_replace(['App','\\','Entity'],'',$entity::class);
+        $this->tableName = str_replace(['App','\\','Entity'], '', $entity::class);
     }
 
-    public function findById(int $id):object
+    public function findById(int $id): object
     {
         $ex = $this->_connect->prepare("SELECT * FROM {$this->tableName} WHERE id = :id");
-        $ex->bindValue('id',$id,PDO::PARAM_INT);
+        $ex->bindValue('id', $id, PDO::PARAM_INT);
         $ex->execute();
         $res = $ex->fetchObject($this->entity::class);
         return $res;
     }
 
-    public function findAll():array
+    public function findAll(): array
     {
         $ex = $this->_connect->query("SELECT * FROM {$this->tableName}");
         $res = $ex->fetchAll(PDO::FETCH_ASSOC);

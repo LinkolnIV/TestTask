@@ -1,9 +1,9 @@
 <?php
 
 use App\Controller\HomeController;
-use App\Controller\SecondController;
+use App\Controller\AlbumsEditController;
 
 $routes = [
     HomeController::class,
-    SecondController::class,
+    AlbumsEditController::class,
 ];

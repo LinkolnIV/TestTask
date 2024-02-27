@@ -4,14 +4,14 @@ namespace App\Controller;
 
 use App\Core\Router\Route;
 use App\Core\Controller\BaseController;
-use App\View\HomeView;
+use App\View\AlbumsEditView;
 
-#[Route(method:'GET', path:"/")]
-class HomeController extends BaseController
+#[Route(method:'GET', path:"/next")]
+class AlbumsEditController extends BaseController
 {
     public function index()
     {
-        $view = new HomeView();
+        $view = new AlbumsEditView();
         $this->render($view, []);
     }
 }

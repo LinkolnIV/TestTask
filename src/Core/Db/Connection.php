@@ -3,7 +3,7 @@
 namespace App\Core\Db;
 
 use PDO;
-use \App\config\Config;
+use App\config\Config;
 
 class Connection
 {
@@ -13,10 +13,10 @@ class Connection
     {
         $config = new Config();
         $config = $config->getDbConfig();
-        $this->connect = new PDO($config['dsn'],$config['username'],$config['password']);
+        $this->connect = new PDO($config['dsn'], $config['username'], $config['password']);
     }
 
-    public function getConnect():PDO
+    public function getConnect(): PDO
     {
         return $this->connect;
     }
