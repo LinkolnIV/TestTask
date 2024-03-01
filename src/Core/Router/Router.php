@@ -14,14 +14,18 @@ class Router
     {
 
         foreach($this->routes as $route) {
-
             $reflection = new \ReflectionClass($route);
-            $attributes = $reflection->getAttributes(Route::class);
-            $params = $attributes[0]->getArguments();
-
-            if ($params['method'] === $_SERVER['REQUEST_METHOD']) {
-                if ($params['path'] === $_SERVER['REQUEST_URI']) {
-                    return (new $route())->index();
+            $methods = $reflection->getMethods();
+            foreach($methods as $method){
+                $attributesClass = $method->getAttributes(Route::class);
+                if(!empty($attributesClass)){
+                    $params = $attributesClass[0]->getArguments();
+                    if ($params['method'] === $_SERVER['REQUEST_METHOD']) {
+                        if ($params['path'] === $_SERVER['REQUEST_URI']) {
+                            $action = $method->getName();
+                            $route->$action();
+                        }
+                    }
                 }
             }
         }

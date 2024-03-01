@@ -6,9 +6,9 @@ use App\Core\Router\Route;
 use App\Core\Controller\BaseController;
 use App\View\HomeView;
 
-#[Route(method:'GET', path:"/")]
 class HomeController extends BaseController
 {
+    #[Route(method:'GET', path:"/")]
     public function index()
     {
         $view = new HomeView();

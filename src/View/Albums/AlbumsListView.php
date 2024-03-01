@@ -1,13 +1,13 @@
 <?php
 
-namespace App\View;
+namespace App\View\Albums;
 
 use App\Core\View\BaseViewInterface;
 
-class AlbumsEditView implements BaseViewInterface
+class AlbumsListView implements BaseViewInterface
 {
     public function content(array $data): void
     {
-        echo "albums";
+        echo "albums list";
     }
 }

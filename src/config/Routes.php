@@ -2,8 +2,14 @@
 
 use App\Controller\HomeController;
 use App\Controller\AlbumsEditController;
+use App\Controller\AlbumsShowController;
+use App\Controller\AlbumsListController;
+use App\Controller\AlbumsAddController;
 
 $routes = [
-    HomeController::class,
-    AlbumsEditController::class,
+    new HomeController(),
+    new AlbumsEditController(),
+    new AlbumsShowController(),
+    new AlbumsListController(),
+    new AlbumsAddController()
 ];

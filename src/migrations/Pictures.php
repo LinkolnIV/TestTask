@@ -1,7 +1,7 @@
 <?php
 
 $ddl = "CREATE TABLE `Pictures` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `path` varchar(255) NOT NULL COMMENT 'путь к картинке',
   `description` varchar(400) DEFAULT NULL COMMENT 'описание',
   PRIMARY KEY (`id`)
