@@ -21,7 +21,7 @@ class Router
                 if(!empty($attributesClass)){
                     $params = $attributesClass[0]->getArguments();
                     if ($params['method'] === $_SERVER['REQUEST_METHOD']) {
-                        if ($params['path'] === $_SERVER['REQUEST_URI']) {
+                        if ($params['path'] === $_SERVER['PATH_INFO']) { // $_SERVER['REQUEST_URI']
                             $action = $method->getName();
                             $route->$action();
                         }

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class Albums
+class AlbumsEntity
 {
     private int $id;
     private string $name;

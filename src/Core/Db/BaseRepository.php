@@ -8,7 +8,7 @@ use PDO;
 class BaseRepository
 {
     protected PDO $_connect;
-    protected string $tableName;
+    public readonly string $tableName;
     protected object $entity;
 
     public function __construct(object $entity)

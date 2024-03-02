@@ -1,15 +1,13 @@
 <?php
 
-namespace App\View;
+namespace App\View\Pictures;
 
 use App\Core\View\BaseViewInterface;
 
-class HomeView implements BaseViewInterface
+class PicturesAddView implements BaseViewInterface
 {
     public function content(array $data): void
     {
-        echo '
-
-        ';
+        echo 'picturesAdd';
     }
 }

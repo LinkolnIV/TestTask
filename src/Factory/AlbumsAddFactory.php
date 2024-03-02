@@ -9,5 +9,6 @@ class AlbumsAddFactory
     {
         $name = $data['name'];
         $description = $data['description'];
+        $logo = $data['logo'];
     }
 }
