@@ -23,16 +23,13 @@ class AlbumsRepository extends BaseRepository
         $req->execute();
     }
 
-    /**
-     * @deprecated 
-     *
-     * @return array
-     */
-    public function getAlbums():array
+    public function getAlbum(int $id):array
     {
-        $sql = "SELECT * FROM testtask.Albums";
-        $res = $this->_connect->query($sql,PDO::FETCH_ASSOC);
-        return $res->fetchAll();
+        $sql = "SELECT * FROM testtask.Albums where id = :id";
+        $ex = $this->_connect->prepare($sql);
+        $ex->bindValue(":id",$id);
+        $ex->execute();
+        return $ex->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAlbumWithData(int $albumId):array

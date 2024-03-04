@@ -3,11 +3,13 @@
 namespace App\View\Pictures;
 
 use App\Core\View\BaseViewInterface;
+use App\Forms\PicturesAddForm;
 
 class PicturesAddView implements BaseViewInterface
 {
     public function content(array $data): void
     {
-        echo 'picturesAdd';
+        $picturesForm = new PicturesAddForm($data);
+        $picturesForm->ShowForm();        
     }
 }

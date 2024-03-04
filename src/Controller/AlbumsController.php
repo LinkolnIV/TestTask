@@ -38,16 +38,11 @@ class AlbumsController extends BaseController
     {
         $name = $_POST['name'];
         $description = $_POST['description'];
-        $logo = $_POST['logo'];
         if(move_uploaded_file($_FILES['logo']['tmp_name'],'./albums/'.$_FILES['logo']['name'])){
             $this->albumsRepository->add(["name"=>$name,"description"=>$description,"logo"=>'./albums/'.$_FILES['logo']['name']]);
         }else{
             echo "<br> false";
         }
-        // print_r($_FILES);
-        // echo "\n logo \n";
-        // print_r($ll);
-        // $this->albumsRepository->add(["name"=>$name,"description"=>$description,"logo"=>$logo]);
     }
 
     #[Route(method:'GET', path:"/albums-edit")]
@@ -71,8 +66,6 @@ class AlbumsController extends BaseController
     public function show()
     {   
         $album = $_GET['album'];
-        // $dd = $this->albumsRepository->getAlbumWithData($album);
-        // print_r($dd);
         $view = new AlbumsShowView();
         $this->render($view, [
             'album'=>$this->albumsRepository->getAlbumWithData($album),

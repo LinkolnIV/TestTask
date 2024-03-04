@@ -33,4 +33,5 @@ class BaseRepository
         $res = $ex->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
+
 }
