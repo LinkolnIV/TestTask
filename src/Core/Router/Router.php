@@ -10,7 +10,7 @@ class Router
     {
     }
 
-    public function router(): mixed
+    public function router()
     {
 
         foreach($this->routes as $route) {
@@ -21,7 +21,7 @@ class Router
                 if(!empty($attributesClass)){
                     $params = $attributesClass[0]->getArguments();
                     if ($params['method'] === $_SERVER['REQUEST_METHOD']) {
-                        if ($params['path'] === $_SERVER['PATH_INFO']) { // $_SERVER['REQUEST_URI']
+                        if ($params['path'] === $_SERVER['REQUEST_URI']) { //$_SERVER['PATH_INFO']
                             $action = $method->getName();
                             $route->$action();
                         }

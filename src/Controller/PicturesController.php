@@ -32,17 +32,20 @@ class PicturesController extends BaseController
     public function ShowFrom()
     {
         $view = new PicturesAddView();
-       $Albums = $this->AlbumsRepository->findAll();
+        $Albums = $this->AlbumsRepository->findAll();
         $this->render($view,[
             "Albums"=>$Albums
         ]);
     }
 
+    /**
+     * @todo Добавить вызов сервиса проверки типа картинки
+     *
+     * @return void
+     */
     #[Route(method:'POST',path:'/pictures-add-action')]
     public function add()
     {
-        // print_r($_POST);
-        // print_r($_FILES['picturePath']);
         $name = $_POST['name'];
         $description = $_POST['description'];
         $albumsId = $_POST['albumsId'];
@@ -50,11 +53,12 @@ class PicturesController extends BaseController
         $picturePath = $_FILES['picturePath']['full_path'];
         $pictureTmp = $_FILES['picturePath']['tmp_name'];
         $pictureType = $_FILES['picturePath']['type'];
+        
         if(move_uploaded_file($pictureTmp,'./pictures/'.$pictureName)){
             $this->PicturesRepository->add(['path'=>$picturePath,'description'=>$description]);
             $PictureAfterAdd = $this->PicturesRepository->getPicture($picturePath);
             $albumFromDb = $this->AlbumsRepository->getAlbum($albumsId);
-            print_r($PictureAfterAdd);
+            // print_r($PictureAfterAdd);
             if(!empty($PictureAfterAdd) && !empty($albumFromDb)){
                 $this->AlbumsPictureRepository->add($albumsId,$PictureAfterAdd[0]['id']);
             }

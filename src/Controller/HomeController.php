@@ -11,7 +11,10 @@ class HomeController extends BaseController
     #[Route(method:'GET', path:"/")]
     public function index()
     {
+        // echo "<br>asdasdad";
         $view = new HomeView();
-        $this->render($view, []);
+        $this->render($view, [
+            // 'user'=>$_SESSION['user']
+        ]);
     }
 }

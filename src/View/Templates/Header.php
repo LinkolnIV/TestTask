@@ -36,11 +36,15 @@ class Header
                     <ul class='dropdown-menu'>
                         <li><a class='dropdown-item' href='/pictures-add'>Добавить картинку</a></li>
                     </ul>
-                </div>
-                <li class='nav-item'>
-                    <a class='nav-link' href='/login'>Войти</a>
-                </li>
-            </ul>
-        ";
+                </div>";
+        if(!is_null($_SESSION['user'])){
+            $text = $_SESSION['user']['name'];
+            echo " <li class='nav-item'> Пользователь:$text</li>";
+        }else{
+            echo " <li class='nav-item'>
+                <a class='nav-link' href='/login'>Войти</a>
+            </li>";
+        }
+        echo"</ul>";
     }
 }
