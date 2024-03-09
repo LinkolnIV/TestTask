@@ -3,6 +3,9 @@
 require_once '../vendor/autoload.php';
 require_once '../src/config/Routes.php';
 
+session_name("TestTask");
+session_start();
+
 use App\Core\Router\Router;
 use App\View\Templates\Header;
 use App\View\Templates\Footer;
