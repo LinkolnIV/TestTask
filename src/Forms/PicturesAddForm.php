@@ -15,6 +15,10 @@ class PicturesAddForm
                   <input type="text" class="form-control" id="pictureName" name="name">
                 </div>
                 <div class="mb-3">
+                    <label for="pictureSort" class="form-label">Уровень сортировки</label>
+                    <input type="text" class="form-control" id="pictureSort" name="sort">
+                </div>
+                <div class="mb-3">
                   <label for="pictureDescription" class="form-label">Описание картинки</label>
                   <textarea class="form-control" id="pictureDescription" name="description"></textarea>
                 </div>

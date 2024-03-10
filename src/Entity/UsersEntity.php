@@ -4,10 +4,18 @@ namespace App\Entity;
 
 class UsersEntity
 {
+
     private int $id;
-    private string $roles;
+    private string $roles ="User";
     private string $password;
     private string $name;
+
+    public function setId(int $id):self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function getId():int
     {

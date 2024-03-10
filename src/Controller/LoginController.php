@@ -45,4 +45,13 @@ class LoginController extends BaseController
         return $this->redirect("/",301);
     }
 
+    #[Route(method:'GET',path:"/logout")]
+    public function logout()
+    {
+        if(!is_null($_SESSION['user'])){
+            unset($_SESSION['user']);
+        }
+        $this->redirect("/",302);
+    }
+
 }

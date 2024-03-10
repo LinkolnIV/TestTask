@@ -8,20 +8,16 @@ class Header
     {
         echo "<!DOCTYPE html>
                 <head>
-                    <title>TEst</title>
+                    <title>TESTTask</title>
                     <link href='./assets/node_modules/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet'/>
-                    <script src='./assets/node_modules/jquery/dist/jquery.min.js'></script>
-                    <script src='./assets/node_modules/@popperjs/core/dist/umd/popper.min.js'></script>
-                    <script src='./assets/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
-                    
                 </head>
             <body>
             <ul class='nav justify-content-end'>
                 <li class='nav-item'>
-                    <a class='nav-link active' aria-current='page' href='/'>Главная</a>
+                    <a class='nav-link link-dark' aria-current='page' href='/home'>Главная</a>
                 </li>
                 <div class='dropdown'>
-                    <button class='btn btn-secondary dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                    <button class='btn dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                         Альбомы
                     </button>
                     <ul class='dropdown-menu'>
@@ -30,20 +26,35 @@ class Header
                     </ul>
                 </div>
                 <div class='dropdown'>
-                    <button class='btn btn-secondary dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                    <button class='btn dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                         Картинки
                     </button>
                     <ul class='dropdown-menu'>
                         <li><a class='dropdown-item' href='/pictures-add'>Добавить картинку</a></li>
                     </ul>
                 </div>";
-        if(!is_null($_SESSION['user'])){
-            $text = $_SESSION['user']['name'];
-            echo " <li class='nav-item'> Пользователь:$text</li>";
+        if(isset($_SESSION['user']) && !is_null($_SESSION['user'])){
+            echo "<div class='dropdown'>
+                    <button class='btn dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        Пользователь
+                    </button>
+                    <ul class='dropdown-menu'>
+                        <li class='nav-item'>{$_SESSION['user']['name']}</li>
+                        <li class='nav-item'><a href='/logout'>Выход</a></li>
+                    </ul>
+                </div>";
         }else{
-            echo " <li class='nav-item'>
-                <a class='nav-link' href='/login'>Войти</a>
-            </li>";
+            echo "<div class='dropdown'>
+                    <button class='btn dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        Пользователь
+                    </button>
+                    <ul class='dropdown-menu'>
+                        <li class='nav-item'>
+                            <a class='nav-link' href='/login'>Вход</a>
+                            <a class='nav-link' href='/register'>Регистрация</a>
+                        </li>
+                    </ul>
+                </div>";
         }
         echo"</ul>";
     }

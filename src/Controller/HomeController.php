@@ -4,17 +4,14 @@ namespace App\Controller;
 
 use App\Core\Router\Route;
 use App\Core\Controller\BaseController;
-use App\View\HomeView;
+use App\View\Home\HomeView;
 
 class HomeController extends BaseController
 {
-    #[Route(method:'GET', path:"/")]
+    #[Route(method:'GET', path:"/home")]
     public function index()
     {
-        // echo "<br>asdasdad";
         $view = new HomeView();
-        $this->render($view, [
-            // 'user'=>$_SESSION['user']
-        ]);
+        $this->render($view, []);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use DateTime;
 
-class Comments
+class CommentsEntity
 {
   private int $id;
   private int $pictureId;
@@ -45,7 +45,7 @@ class Comments
     return $this->date;
   }
 
-  public function setDate(?DateTime $date)
+  public function setDate(?DateTime $date = new DateTime('now'))
   {
     $this->date = $date;
 

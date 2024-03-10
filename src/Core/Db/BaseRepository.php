@@ -18,6 +18,13 @@ class BaseRepository
         $this->tableName = str_replace(['App','\\','Entity'], '', $entity::class);
     }
 
+    public function remove(int $id):bool
+    {
+        $req = $this->_connect->prepare("DELETE FROM {$this->tableName} WHERE id = :id");
+        $req->bindValue("id",$id,PDO::PARAM_INT);
+        return $req->execute();
+    }
+
     public function findById(int $id): object
     {
         $ex = $this->_connect->prepare("SELECT * FROM {$this->tableName} WHERE id = :id");

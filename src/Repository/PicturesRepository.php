@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Core\Db\BaseRepository;
 use App\Entity\PicturesEntity;
+use PDO;
 
 class PicturesRepository extends BaseRepository
 {
@@ -13,27 +14,24 @@ class PicturesRepository extends BaseRepository
         parent::__construct($entity);
     }
 
-    public function test(): array
-    {
-        $ex = $this->_connect->query("SELECT * FROM {$this->tableName}");
-        $res = $ex->fetchAll();
-        return $res;
-    }
-
     /**
      * tmp solution
      *
      * @param array $field
-     * @return void
+     * @return int
      */
-    public function add(array $field):void
+    public function add(array $field):int
     {
         
-        $sql = "INSERT INTO {$this->tableName}(path,description) VALUES(:path,:description)";
+        $sql = "INSERT INTO {$this->tableName}(path,description,sort,name) VALUES(:path,:description,:sort,:name)";
         $req = $this->_connect->prepare($sql);
-        $req->bindValue(':path',$field['path']);
-        $req->bindValue(':description',$field['description']);
+        $req->bindValue('path',$field['path']);
+        $req->bindValue('description',$field['description']);
+        $req->bindValue('sort',$field['sort'],PDO::PARAM_INT);
+        $req->bindValue('name',$field['name'],PDO::PARAM_STR);
         $req->execute();
+
+        return $this->_connect->lastInsertId();
     }
 
     public function getPicture(string $path):array
@@ -44,4 +42,14 @@ class PicturesRepository extends BaseRepository
         return $ex->fetchAll();
     }
 
+    public function updatePicture(array $data):bool
+    {
+        $sql = "UPDATE {$this->tableName} set name = :name,description = :description, sort = :sort WHERE id = :pictureId";
+        $req = $this->_connect->prepare($sql);
+        $req->bindValue("name",$data['name'],PDO::PARAM_STR);
+        $req->bindValue('description',$data['description'],PDO::PARAM_STR);
+        $req->bindValue('pictureId',$data['pictureId'],PDO::PARAM_INT);
+        $req->bindValue('sort',$data['sort'],PDO::PARAM_INT);
+        return $req->execute();
+    }
 }

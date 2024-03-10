@@ -9,7 +9,6 @@ class AlbumsAddView implements BaseViewInterface
     public function content(array $data): void
     {
         $albumsForm = new AlbumsAddForm($data);
-        echo "albums add";
         $albumsForm->ShowForm();
     }
 }

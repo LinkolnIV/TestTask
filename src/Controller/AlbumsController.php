@@ -38,24 +38,31 @@ class AlbumsController extends BaseController
     {
         $name = $_POST['name'];
         $description = $_POST['description'];
+
         if(move_uploaded_file($_FILES['logo']['tmp_name'],'./albums/'.$_FILES['logo']['name'])){
             $this->albumsRepository->add(["name"=>$name,"description"=>$description,"logo"=>'./albums/'.$_FILES['logo']['name']]);
-        }else{
-            echo "<br> false";
         }
     }
 
     #[Route(method:'GET', path:"/albums-edit")]
     public function edit()
     {
+        if(isset($_SESSION['user']) && !is_null($_SESSION['user'])){
+            $userId = $_SESSION['user']['id'];
+        }else{
+            $userId = null;
+        }
+
+        $album = $_GET['album'];
         $view = new AlbumsEditView();
-        $this->render($view, []);
+        $this->render($view, [
+            'album'=>$this->albumsRepository->getAlbumWithData($album,$userId),
+        ]);
     }
 
     #[Route(method:'GET', path:"/albums-list")]
     public function list()
     {   
-        
         $view = new AlbumsListView();
         $this->render($view, [
             'albums'=>$this->albumsRepository->findAll(),
@@ -65,11 +72,26 @@ class AlbumsController extends BaseController
     #[Route(method:'GET', path:"/albums-show")]
     public function show()
     {   
+        if(isset($_SESSION['user']) && !is_null($_SESSION['user'])){
+            $userId = $_SESSION['user']['id'];
+        }else{
+            $userId = null;
+        }
+
         $album = $_GET['album'];
+        $data= $this->albumsRepository->getAlbumWithData($album,$userId);
+        // print_r($data);
         $view = new AlbumsShowView();
         $this->render($view, [
-            'album'=>$this->albumsRepository->getAlbumWithData($album),
+            'album'=>$data,
         ]);
+    }
+    
+    #[Route(method:"POST",path:'/albums-remove')]
+    public function remove()
+    {
+        $albums = $_POST['album'];
+        $this->albumsRepository->remove($albums);
     }
 
 }
